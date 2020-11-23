@@ -7,8 +7,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./assets/main.css";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import Vuelidate from "vuelidate";
 
 Vue.config.productionTip = false;
+Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 new Vue({
