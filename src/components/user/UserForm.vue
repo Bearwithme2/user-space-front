@@ -49,38 +49,25 @@ import UserFormSkeleton from "@/components/user/UserFormSkeleton";
 export default {
   name: "UserForm",
   components: { UserFormSkeleton },
-  data() {
-    return {
-      form: {
-        name: "",
-        surname: "",
-        email: "",
-        password: ""
-      },
-      loading: true
-    };
-  },
-  mounted() {
-    this.loadProfile();
+  props: {
+    loading: {
+      type: Boolean,
+      default: true
+    },
+    form: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {
+          name: "",
+          surname: "",
+          email: "",
+          password: ""
+        };
+      }
+    }
   },
   methods: {
-    async loadProfile() {
-      let $this = this;
-      await this.$axios("https://localhost:8001/user", {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then(function(json) {
-          $this.form = json.data.form;
-        })
-        .catch(function(e) {
-          console.error(e.message);
-        })
-        .finally(function() {
-          $this.loading = false;
-        });
-    },
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));

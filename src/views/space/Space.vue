@@ -3,17 +3,11 @@
     <b-row cols="3">
       <b-col>
         <Profile>
-          <UserForm />
+          <UserForm :loading="loading" :form="form" />
         </Profile>
       </b-col>
-      <b-col class="foo" cols="8">
-        <b-card>
-          <b-nav tabs>
-            <b-nav-item>A</b-nav-item>
-            <b-nav-item>B</b-nav-item>
-            <b-nav-item>C</b-nav-item>
-          </b-nav>
-        </b-card>
+      <b-col cols="8">
+        <ProfileContent />
       </b-col>
     </b-row>
   </b-container>
@@ -22,9 +16,43 @@
 <script>
 import Profile from "@/views/space/Profile";
 import UserForm from "@/components/user/UserForm";
+import ProfileContent from "@/views/space/ProfileContent";
 
 export default {
   name: "Space",
-  components: { UserForm, Profile }
+  components: { ProfileContent, UserForm, Profile },
+  data: () => {
+    return {
+      loading: true,
+      form: {
+        name: "",
+        surname: "",
+        email: "",
+        password: ""
+      }
+    };
+  },
+  mounted() {
+    this.loadProfile();
+  },
+  methods: {
+    async loadProfile() {
+      let $this = this;
+      await this.$axios("https://localhost:8001/user", {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(function(json) {
+          $this.form = json.data.form;
+        })
+        .catch(function(e) {
+          console.error(e.message);
+        })
+        .finally(function() {
+          $this.loading = false;
+        });
+    }
+  }
 };
 </script>
