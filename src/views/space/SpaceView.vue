@@ -6,17 +6,17 @@
           <UserForm :loading="loading" :form="form" />
         </Profile>
       </b-col>
-      <b-col cols="8">
-        <ProfileContent />
+      <b-col class="pl-0" cols="8">
+        <ProfileContent :posts="posts" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import Profile from "@/views/space/Profile";
+import Profile from "@/views/space/Components/Profile";
 import UserForm from "@/components/user/UserForm";
-import ProfileContent from "@/views/space/ProfileContent";
+import ProfileContent from "@/views/space/Components/ProfileContent/ProfileContent";
 
 export default {
   name: "Space",
@@ -29,28 +29,36 @@ export default {
         surname: "",
         email: "",
         password: ""
-      }
+      },
+      posts: []
     };
   },
   mounted() {
     this.loadProfile();
+    this.loadPosts();
   },
   methods: {
     async loadProfile() {
       let $this = this;
-      await this.$axios("https://localhost:8001/user", {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then(function(json) {
+      await this.$axios("https://localhost:8001/user")
+        .then(json => {
           $this.form = json.data.form;
         })
-        .catch(function(e) {
+        .catch(e => {
           console.error(e.message);
         })
-        .finally(function() {
+        .finally(() => {
           $this.loading = false;
+        });
+    },
+    async loadPosts() {
+      let $this = this;
+      await this.$axios("https://localhost:8001/posts")
+        .then(json => {
+          $this.posts = json.data.posts;
+        })
+        .catch(e => {
+          console.error(e.message);
         });
     }
   }

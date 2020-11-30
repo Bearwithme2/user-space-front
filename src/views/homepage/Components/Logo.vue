@@ -1,5 +1,5 @@
 <template>
-  <img alt="userspace logo" src="../../assets/logo.png" />
+  <img alt="userspace logo" src="../../../assets/logo.png" />
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
 <style scoped>
 img {
   width: 50%;
-  max-width: 400px;
+  max-width: 800px;
   height: auto;
 }
 </style>
