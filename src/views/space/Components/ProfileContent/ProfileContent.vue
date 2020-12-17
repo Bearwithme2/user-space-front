@@ -1,9 +1,9 @@
 <template>
   <b-card no-body>
     <b-tabs card>
-      <Posts :posts="posts" />
-      <Friends />
-      <Groups />
+      <posts :posts="posts" />
+      <friends />
+      <groups />
     </b-tabs>
   </b-card>
 </template>

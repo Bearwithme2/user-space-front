@@ -4,12 +4,13 @@
     <b-navbar-nav>
       <b-nav-item to="/">Home</b-nav-item>
       <b-nav-item to="/space">Space</b-nav-item>
+      <b-nav-item to="/admin">Admin</b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>
 
 <script>
 export default {
-  name: "Navigation"
-};
+  name: 'Navigation',
+}
 </script>

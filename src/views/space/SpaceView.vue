@@ -2,12 +2,12 @@
   <b-container fluid>
     <b-row cols="3">
       <b-col>
-        <Profile>
-          <UserForm :loading="loading" :form="form" />
-        </Profile>
+        <profile>
+          <user-form :loading="loading" :form="form" />
+        </profile>
       </b-col>
       <b-col class="pl-0" cols="8">
-        <ProfileContent :posts="posts" />
+        <profile-content :posts="posts" />
       </b-col>
     </b-row>
   </b-container>
